@@ -1,10 +1,24 @@
 <div class="center jumbotron">
-  <h1>Welcome to the Sample App</h1>
-  <h2>
+  <h1>Welcome</h1>
+  <h2>Reverse Polish Notation Calculator</h2>
+  <!--h2>
     This is the home page for the
     <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a> 
     sample application.
-  </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  </h2-->
+  <!--%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %-->
+  <%= form_tag(root_path, :method => "get") do %>
+    <%= label_tag('number of digits', "Precision:") %>
+    <%= radio_button_tag(:precision, '0', !!(params[:precision].nil? || params[:precision] == '0')) %> 0 digits&nbsp;&nbsp;&nbsp;
+    <%= radio_button_tag(:precision, '2', !!(params[:precision].nil? || params[:precision] == '2')) %> 2 digits&nbsp;&nbsp;&nbsp;
+    <%= radio_button_tag(:precision, 'float', !!(params[:precision].nil? || params[:precision] == 'float')) %> float
+    <br/>
+    <%= label_tag(:q, "RPN expression") %>
+    <%= text_field_tag(:q, params[:q]) %>
+    <%= submit_tag("Calc") %>
+    <br/>
+    <%= label_tag(:q, "Result: ") %>
+    <%= @result %>
+    <% end %>
 </div>
 <%= link_to image_tag("hamster.jpg", alt: "Hamster logo"), 'https://github.com/bhmj/' %>
