@@ -19,6 +19,8 @@ class StaticPagesController < ApplicationController
       functions fns
     end
     @result = pc.calc(params[:q])
+    rescue StandardError => err
+      @result = err
   end
 
   def help
