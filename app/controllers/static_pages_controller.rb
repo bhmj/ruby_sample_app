@@ -13,12 +13,12 @@ class StaticPagesController < ApplicationController
     else
       :d_0
     end
+    fns = params[:fns]
     pc = PolandCalculator.new do
       decimal_selector d
+      functions fns
     end
     @result = pc.calc(params[:q])
-    rescue StandardError => err
-      @result = err.to_s
   end
 
   def help

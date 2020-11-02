@@ -13,6 +13,8 @@
     <%= radio_button_tag(:precision, '2', !!(params[:precision].nil? || params[:precision] == '2')) %> 2 digits&nbsp;&nbsp;&nbsp;
     <%= radio_button_tag(:precision, 'float', !!(params[:precision].nil? || params[:precision] == 'float')) %> float
     <br/>
+    <%= label_tag('number of digits', "User-defined functions:") %> <%= text_area_tag(:fns, params[:fns]) %>
+    <br/>
     <%= label_tag(:q, "RPN expression") %>
     <%= text_field_tag(:q, params[:q]) %>
     <%= submit_tag("Calc") %>

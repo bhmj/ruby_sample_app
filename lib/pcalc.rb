@@ -1,3 +1,5 @@
+require 'sourcify'
+
 class UnsupportedDecimalSelector < StandardError; end
 class InsufficientArguments < StandardError; end
 class InvalidToken < StandardError; end
@@ -15,8 +17,8 @@ class PolandCalculator
     @decimal_selector = dec
   end
 
-  def functions(&block)
-    @fns = block
+  def functions(str)
+    @fns = str
   end
 
   def token_type (tok)
@@ -45,9 +47,12 @@ class PolandCalculator
 
     # prepare functions (not sure if this is a good way to do it but it works)
     str.split(' ').each do |fn|
+      puts 'scanning tokens'
       if token_type(fn) == :function
+        puts "creating #{fn}"
         singleton_class.define_method(fn) do |lmb|
-          singleton_class.define_method("f"+fn) do |arg|
+            puts 'creating f_fn'
+            singleton_class.define_method("f"+fn) do |arg|
             result = lmb.call(arg)
             return result
           end
@@ -56,7 +61,7 @@ class PolandCalculator
     end
 
     if @fns != nil then
-      instance_eval &@fns
+      instance_eval @fns
     end
 
     # process
